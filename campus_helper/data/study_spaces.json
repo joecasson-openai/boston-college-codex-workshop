@@ -1,0 +1,40 @@
+{
+  "spots": [
+    {
+      "name": "O'Neill Library 2nd Floor",
+      "zone": "Main Campus",
+      "vibe": "quiet",
+      "whiteboard": true,
+      "hours_key": "O'Neill Library",
+      "summary": "Good for focused solo work with easy access to reference help.",
+      "features": ["outlets", "quiet desks", "near coffee"]
+    },
+    {
+      "name": "Bapst Library Reading Room",
+      "zone": "Main Campus",
+      "vibe": "sunny",
+      "whiteboard": false,
+      "hours_key": "Bapst Library",
+      "summary": "Bright room with a calm atmosphere for long reading sessions.",
+      "features": ["natural light", "historic setting", "silent floor"]
+    },
+    {
+      "name": "Innovation Lab Collaboration Tables",
+      "zone": "Engineering Wing",
+      "vibe": "collaborative",
+      "whiteboard": true,
+      "hours_key": null,
+      "summary": "Best for team work, sketching, and quick prototype reviews.",
+      "features": ["whiteboards", "moveable chairs", "group tables"]
+    },
+    {
+      "name": "Lower Campus Commons Nook",
+      "zone": "Lower Campus",
+      "vibe": "quiet",
+      "whiteboard": true,
+      "hours_key": null,
+      "summary": "Smaller corner space that works well for afternoon catch-up sessions.",
+      "features": ["whiteboard", "window seats", "near snacks"]
+    }
+  ]
+}

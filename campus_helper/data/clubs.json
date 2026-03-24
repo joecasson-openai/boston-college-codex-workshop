@@ -1,0 +1,19 @@
+{
+  "clubs": [
+    {
+      "name": "Coding Club",
+      "mission": "building practical software projects with beginner-friendly workshops",
+      "default_location": "245 Beacon Street Lab"
+    },
+    {
+      "name": "Eco Collective",
+      "mission": "connecting sustainability ideas to campus action",
+      "default_location": "Student Center Room 201"
+    },
+    {
+      "name": "Debate Society",
+      "mission": "helping students practice persuasive speaking and structured argument",
+      "default_location": "O'Neill Seminar Room"
+    }
+  ]
+}

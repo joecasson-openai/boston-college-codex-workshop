@@ -1,0 +1,24 @@
+{
+  "halls": [
+    {
+      "name": "Hillside Cafe",
+      "days": {
+        "Monday": {"open": "8:00 AM", "close": "8:00 PM", "special": "Soup and sandwich combo"},
+        "Tuesday": {"open": "8:00 AM", "close": "8:00 PM", "special": "Taco bar"},
+        "Wednesday": {"open": "8:00 AM", "close": "8:00 PM", "special": "Late-night coffee cart"},
+        "Thursday": {"open": "8:00 AM", "close": "8:00 PM", "special": "Pasta station"},
+        "Friday": {"open": "8:00 AM", "close": "6:00 PM", "special": "Bakery pop-up"}
+      }
+    },
+    {
+      "name": "Stokes Hall Cafe",
+      "days": {
+        "Monday": {"open": "7:30 AM", "close": "5:00 PM", "special": "Bagel bar"},
+        "Tuesday": {"open": "7:30 AM", "close": "5:00 PM", "special": "Smoothie special"},
+        "Wednesday": {"open": "7:30 AM", "close": "5:00 PM", "special": "Study break cookies"},
+        "Thursday": {"open": "7:30 AM", "close": "5:00 PM", "special": "Tea tasting"},
+        "Friday": {"open": "7:30 AM", "close": "4:00 PM", "special": "Grab-and-go wraps"}
+      }
+    }
+  ]
+}

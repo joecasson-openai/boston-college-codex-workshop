@@ -1,0 +1,716 @@
+title: Campus Helper Student Self-Paced Codex Guide
+summary: >
+  A local-first learning guide for students who want to keep building with Codex
+  after the live Campus Helper workshop. The guide keeps the strongest parts of
+  the reference onboarding flow: sequenced actions, exact prompts, milestone
+  unlocks, checkpoints, and an optional advanced path for saving and sharing work.
+navigation:
+  - id: start_here
+    title: Start Here
+    description: Learn what Codex is, what this repo contains, and how to resume work after class.
+  - id: core_path
+    title: Core Path
+    description: Follow the guided modules that reinforce the live workshop and get you back into flow quickly.
+  - id: practice_labs
+    title: Practice Labs
+    description: Debug the seeded issues step by step using the current Campus Helper codebase.
+  - id: build_your_own_project
+    title: Build Your Own Project
+    description: Extend the repo with a new student-facing capability or build a small project from a starter brief.
+  - id: troubleshooting
+    title: Troubleshooting
+    description: Use targeted prompts, validation commands, and FAQs when you get stuck without an instructor nearby.
+  - id: optional_advanced_track
+    title: Optional Advanced Track
+    description: Learn how to save, share, and optionally deploy your work without blocking the core learning path.
+modules:
+  - id: module-1-start-here
+    title: "Module 1: Start Here and Re-Enter the Workshop"
+    track: core
+    section: start_here
+    estimated_time: 10-15 minutes
+    prerequisites:
+      - Python 3.10+
+      - Codex desktop app
+      - Local copy of this repository
+    learning_objectives:
+      - Understand what the Campus Helper repo is meant to teach.
+      - Reopen the project in Codex without waiting for an instructor.
+      - Leave the module knowing where to look when you forget how the workshop is organized.
+    artifact_to_complete: The repo is open in Codex and the student can describe the purpose of the `skills`, `plugins`, `services`, and `automations` folders.
+    validation_step: Open `README.md` and verify you can find the quick start, folder structure, and seeded bug descriptions.
+    milestone_label: "Milestone unlocked: you can orient yourself in the repo without live help."
+    steps:
+      - action: Read the top-level README and compare the workshop flow to the folders in the repo.
+        why_it_matters: Students often lose momentum after class because they forget where the architecture lives.
+        exact_prompt: |
+          Inspect this repository and explain, in plain language, what each of these folders is for:
+          `campus_helper/skills`, `campus_helper/plugins`, `campus_helper/services`,
+          `campus_helper/automations`, and `campus_helper/data`.
+        expected_result: A concise architecture explanation that matches the repo layout and workshop goals.
+        troubleshooting_note: If the explanation is vague, ask Codex to cite specific files in each folder.
+        screenshot_ref: README architecture overview and the repo file tree in Codex.
+      - action: Re-state the workshop goals in your own words.
+        why_it_matters: The guide should keep students anchored on outcomes, not just code edits.
+        exact_prompt: |
+          Summarize the purpose of this workshop repo for a student who missed the live intro.
+          Keep it to five bullets and mention the two seeded bugs.
+        expected_result: A five-bullet recap that includes the learning goals and the deliberate breakpoints.
+        troubleshooting_note: If the seeded bugs are missing, ask Codex to search for `TODO(workshop)` and identify the broken paths.
+        screenshot_ref: The Workshop Challenges document open beside the Codex response.
+      - action: Set your personal restart point for the next time you open the repo.
+        why_it_matters: Self-paced learners need an easy resume ritual after a long break.
+        exact_prompt: |
+          Based on this repository, tell me the three files I should reopen first when I come back later
+          and explain what question each file helps me answer.
+        expected_result: A short resume checklist, usually centered on `README.md`, `WORKSHOP_CHALLENGES.md`, and `campus_helper/workshop_registry.py`.
+        troubleshooting_note: If Codex suggests too many files, ask it to narrow the answer to the minimum three.
+        screenshot_ref: A local note or pinned Codex thread with the three-file resume checklist.
+    checkpoints:
+      - student_input: Write one sentence describing what each major folder contributes to the app.
+        what_to_verify: Compare your sentences to the repo layout and the README architecture section.
+        success_criteria: You can explain the repo without using generic phrases like "backend stuff" or "config stuff."
+        stretch_option: Add one sentence about why `workshop_registry.py` is a merge-conflict hotspot.
+      - student_input: Save or pin a restart prompt for future sessions.
+        what_to_verify: Confirm your prompt mentions the files that should be re-opened first.
+        success_criteria: You have a concrete restart instruction you can reuse after class.
+        stretch_option: Ask Codex to turn your restart prompt into a reusable template.
+  - id: module-2-run-local-app
+    title: "Module 2: Run Campus Helper Locally and Understand the App"
+    track: core
+    section: core_path
+    estimated_time: 15-20 minutes
+    prerequisites:
+      - Module 1 complete
+      - Terminal access on the local machine
+    learning_objectives:
+      - Run the current app locally.
+      - Understand what the main Streamlit app exposes today.
+      - Learn how to validate that the repo still works before making changes.
+    artifact_to_complete: The student can launch the main workshop app, describe each tab, and run the existing tests.
+    validation_step: Run `python3 -m unittest discover -s tests` and confirm the tests pass before making code changes.
+    milestone_label: "Milestone unlocked: you can boot the repo, inspect the UI, and validate the baseline."
+    steps:
+      - action: Set up the local environment and install dependencies.
+        why_it_matters: A repeatable setup path is the first blocker students hit when they return after class.
+        exact_prompt: |
+          Give me the exact terminal commands to create a virtual environment, install dependencies,
+          and run the Campus Helper Streamlit app for this repository.
+        expected_result: A short command list that includes creating `.venv`, installing `requirements.txt`, and running `streamlit run app.py`.
+        troubleshooting_note: If the commands span multiple lines, ask Codex to combine them into a copy-paste friendly sequence.
+        screenshot_ref: Terminal commands and the Streamlit app landing page.
+      - action: Inspect the app tabs and the sidebar warnings.
+        why_it_matters: The current app intentionally exposes both working paths and broken teaching moments.
+        exact_prompt: |
+          I have the app running. Explain what each tab is for and tell me what warnings or omissions
+          are intentionally part of the workshop.
+        expected_result: A tab-by-tab explanation and a note that optional components fail to load on purpose.
+        troubleshooting_note: If you do not see the warning area, refresh the app and inspect the sidebar again.
+        screenshot_ref: Main app overview tab and the sidebar component counts.
+      - action: Validate the repo before changing code.
+        why_it_matters: Students should build the habit of checking the baseline so they know whether they broke something new.
+        exact_prompt: |
+          Run the unit tests for this repository and summarize what they cover in plain language.
+        expected_result: Passing tests plus a simple description of what the existing tests assert.
+        troubleshooting_note: If a command fails because a dependency is missing, install the requirements first and rerun.
+        screenshot_ref: Terminal output for the passing unit test run.
+    checkpoints:
+      - student_input: Describe what the Overview, Playground, Automations, and Services tabs each do.
+        what_to_verify: Compare your summary to the live app and `app.py`.
+        success_criteria: You can tell a new student where to go for each kind of task without guessing.
+        stretch_option: Identify one improvement you would make to the existing app navigation.
+      - student_input: Record the validation command you should run before editing code.
+        what_to_verify: Confirm it matches the test command in the README.
+        success_criteria: You know how to re-check the baseline after future edits.
+        stretch_option: Ask Codex to suggest one more low-cost validation command for this repo.
+  - id: module-3-registration-bug
+    title: "Module 3: Debug the Broken Skill Registration"
+    track: core
+    section: practice_labs
+    estimated_time: 15-20 minutes
+    prerequisites:
+      - Module 2 complete
+    learning_objectives:
+      - Trace a loading failure from the UI to the registry.
+      - Compare a declared class path to the actual file structure.
+      - Fix a small bug by inspecting the current code instead of guessing.
+    artifact_to_complete: The student can identify why the implemented club blurb skill does not appear and describe the fix.
+    validation_step: Reopen the workshop app or inspect the warning output to confirm the bad class path is the root cause.
+    milestone_label: "Milestone unlocked: you can trace a broken registration path through the repo."
+    steps:
+      - action: Start from the symptom instead of the code.
+        why_it_matters: Good debugging starts from what the app shows, not from random edits.
+        exact_prompt: |
+          The README says there is an implemented skill that is not loading correctly.
+          Inspect the repo and tell me which skill is missing from the app and why.
+        expected_result: Codex points to the `club_blurb` skill and the incorrect registry path.
+        troubleshooting_note: If the answer is uncertain, ask Codex to compare the registry import string to the actual file path on disk.
+        screenshot_ref: Sidebar warning message and the skill file list in `campus_helper/skills`.
+      - action: Inspect the registry and the matching file side by side.
+        why_it_matters: Students need practice comparing intended configuration with actual implementation.
+        exact_prompt: |
+          Compare `campus_helper/workshop_registry.py` with the files in `campus_helper/skills`.
+          Show me the exact mismatch that keeps the club blurb skill from loading.
+        expected_result: A direct comparison that shows the registry references `club_event_blurbs` while the real file is `club_blurb.py`.
+        troubleshooting_note: If Codex only says "the import is wrong," ask it to provide the exact before and after path strings.
+        screenshot_ref: Registry file and `club_blurb.py` visible at the same time.
+      - action: Practice writing the fix before you apply it.
+        why_it_matters: Self-paced learners benefit from articulating the intended change before they edit code.
+        exact_prompt: |
+          Do not edit the repo yet. Tell me the smallest code change needed to fix the missing skill
+          and how I would verify the fix afterward.
+        expected_result: A one-line registry change plus a verification step that the skill appears in the UI.
+        troubleshooting_note: If verification is vague, ask for both a UI check and a code-level check.
+        screenshot_ref: Your written fix plan or pinned Codex answer.
+    checkpoints:
+      - student_input: Write the incorrect class path and the corrected class path.
+        what_to_verify: Confirm the strings match the current file name and class name in `club_blurb.py`.
+        success_criteria: You can explain the bug as a configuration mismatch, not a logic bug.
+        stretch_option: Ask Codex to explain why this type of issue is common in plugin or registry systems.
+      - student_input: Describe how you would verify the fix after editing.
+        what_to_verify: Confirm your verification includes reopening the app or refreshing the loaded skills.
+        success_criteria: You can prove the bug is fixed, not just claim it.
+        stretch_option: Add one test idea that would catch this earlier.
+  - id: module-4-service-contract-bug
+    title: "Module 4: Debug the Service and Consumer Contract Mismatch"
+    track: core
+    section: practice_labs
+    estimated_time: 20-25 minutes
+    prerequisites:
+      - Module 2 complete
+      - Familiarity with Module 3 debugging flow
+    learning_objectives:
+      - Trace data from JSON to a service to a skill consumer.
+      - Spot mismatched field names across boundaries.
+      - Decide whether the best fix belongs in the service or the consumer.
+    artifact_to_complete: The student can explain why the study spots workflow shows missing hours and propose a clean fix.
+    validation_step: Inspect `library_hours.json`, `library_hours.py`, and `study_spots.py` and identify which keys mismatch.
+    milestone_label: "Milestone unlocked: you can debug a data contract across files."
+    steps:
+      - action: Run the symptom path in the app.
+        why_it_matters: The bug makes more sense when you connect the broken output to the underlying data contract.
+        exact_prompt: |
+          Inspect the study spots workflow in this repo and tell me why some hours show as unavailable or incomplete.
+          Trace the issue from the app output back to the code.
+        expected_result: Codex explains that the service returns `opens_at` and `closes_at` while the skill reads `open_time` and `close_time`.
+        troubleshooting_note: If the answer skips the JSON file, ask Codex to include the raw input shape as part of the trace.
+        screenshot_ref: Study spots output and the service/skill source files.
+      - action: Compare the data boundary directly.
+        why_it_matters: Students should learn to inspect the contract itself, not just the symptom.
+        exact_prompt: |
+          Compare the return shape from `campus_helper/services/library_hours.py` with what
+          `campus_helper/skills/study_spots.py` expects. Show me the exact field-name mismatch.
+        expected_result: A direct field-by-field comparison of the service output and the consumer expectation.
+        troubleshooting_note: If the explanation is abstract, ask Codex to show a sample dictionary for each side.
+        screenshot_ref: The relevant function in the service and the `open_time` lookup in the skill.
+      - action: Evaluate the best fix location.
+        why_it_matters: This is where students practice engineering judgment instead of only making code compile.
+        exact_prompt: |
+          Do not edit the code yet. Tell me whether the cleaner fix belongs in the service or in the consumer,
+          and justify the decision in three sentences.
+        expected_result: A recommendation, usually to normalize once in the service so future consumers do not repeat the adaptation.
+        troubleshooting_note: If Codex gives both options without choosing, ask it to commit to one default and explain why.
+        screenshot_ref: Your fix recommendation saved as a note next to the code.
+    checkpoints:
+      - student_input: Write the raw JSON keys and the keys the skill expects.
+        what_to_verify: Confirm both sets of keys are copied exactly from the code or data file.
+        success_criteria: You can state the mismatch without hand-waving.
+        stretch_option: Draft a tiny test case that would assert the normalized output shape.
+      - student_input: Decide where you would normalize the data and why.
+        what_to_verify: Compare your answer to the service and skill responsibilities in the repo.
+        success_criteria: Your reasoning addresses reuse, readability, and future maintenance.
+        stretch_option: Ask Codex whether any other services in the repo should adopt the same shape.
+  - id: module-5-add-capability
+    title: "Module 5: Add One New Capability Using an Existing Pattern"
+    track: core
+    section: core_path
+    estimated_time: 20-30 minutes
+    prerequisites:
+      - Modules 2 through 4 complete
+    learning_objectives:
+      - Extend the repo without rewriting its structure.
+      - Reuse an existing implementation pattern for a new student-facing capability.
+      - Practice asking Codex for bounded changes instead of one giant request.
+    artifact_to_complete: A new capability plan and the first implementation pass for a small student-facing feature.
+    validation_step: Pick one existing pattern to copy and state which file you will mirror before editing.
+    milestone_label: "Milestone unlocked: you can extend the repo by following a known pattern."
+    steps:
+      - action: Choose a bounded feature idea.
+        why_it_matters: Small, concrete features are easier to ship and easier to learn from than vague "make it better" requests.
+        exact_prompt: |
+          Based on the current Campus Helper repo, suggest three small new capabilities a student could add
+          in under 45 minutes. For each one, tell me which existing file is the best pattern to copy.
+        expected_result: Three realistic feature ideas with a recommended starting point from the current codebase.
+        troubleshooting_note: If the ideas are too ambitious, ask Codex to constrain them to one new file plus one registry update.
+        screenshot_ref: Feature options and the matched pattern files.
+      - action: Turn the chosen idea into an implementation brief.
+        why_it_matters: This builds the habit of making the task specific before editing code.
+        exact_prompt: |
+          I want to add this new capability: [describe your choice].
+          Turn it into a short implementation brief with the files to touch, the expected input fields,
+          and how I should verify it works.
+        expected_result: A brief with clear files, inputs, and a validation path.
+        troubleshooting_note: If the brief touches too many files, ask Codex to reduce it to a v1.
+        screenshot_ref: The implementation brief pinned in the Codex thread.
+      - action: Create an exact edit prompt.
+        why_it_matters: Students improve faster when they learn how to give Codex a bounded implementation task.
+        exact_prompt: |
+          Write the exact Codex prompt I should use to implement this feature in small, safe steps.
+          Make the prompt mention the pattern file it should follow.
+        expected_result: A ready-to-run implementation prompt that is narrow and specific.
+        troubleshooting_note: If the prompt is too broad, ask Codex to split it into "inspect first" and "then implement" phases.
+        screenshot_ref: The final implementation prompt ready to paste.
+    checkpoints:
+      - student_input: Record the capability you chose and the existing file you will mimic.
+        what_to_verify: Confirm the pattern file already solves a similar problem in the repo.
+        success_criteria: Your feature is scoped tightly enough for one study session.
+        stretch_option: Define one follow-on enhancement you will deliberately postpone to v2.
+      - student_input: Save the implementation brief and prompt for reuse.
+        what_to_verify: Make sure they include both validation steps and file targets.
+        success_criteria: You could come back tomorrow and continue without re-planning from scratch.
+        stretch_option: Turn your implementation brief into a reusable template for future exercises.
+  - id: module-6-reflect-next-steps
+    title: "Module 6: Reflect, Consolidate, and Choose What to Try Next"
+    track: core
+    section: core_path
+    estimated_time: 10-15 minutes
+    prerequisites:
+      - Modules 1 through 5 complete
+    learning_objectives:
+      - Convert workshop actions into reusable learning habits.
+      - Identify the next best exercise instead of drifting after class.
+      - Create a personal after-class prompt set.
+    artifact_to_complete: A saved personal practice plan with one next task, one resume prompt, and one troubleshooting prompt.
+    validation_step: Save your three prompts in a doc, note, or pinned thread and confirm they map to real repo actions.
+    milestone_label: "Milestone unlocked: you have a personal after-class practice plan."
+    steps:
+      - action: Capture what you learned about the repo.
+        why_it_matters: Reflection makes the next session faster and reduces repeated confusion.
+        exact_prompt: |
+          Summarize what I have learned from this repo so far in three sections:
+          architecture, debugging habits, and feature-building habits.
+        expected_result: A short, structured reflection anchored to this repository.
+        troubleshooting_note: If the answer sounds generic, ask Codex to tie each point to a specific file or bug.
+        screenshot_ref: Your saved reflection note.
+      - action: Choose your next best exercise.
+        why_it_matters: Students keep going longer when the next task is already chosen.
+        exact_prompt: |
+          Based on the current workshop repo and the exercises I have already completed,
+          recommend the single best next exercise for me and explain why it is the right next step.
+        expected_result: One recommended next exercise, not a long list.
+        troubleshooting_note: If Codex gives multiple options, ask it to rank them and pick one default.
+        screenshot_ref: The recommended next exercise with its rationale.
+      - action: Save three reusable prompts.
+        why_it_matters: Prompt reuse is part of self-paced learning, not just a convenience.
+        exact_prompt: |
+          Create three reusable prompts for this repo:
+          1) a restart prompt after a long break,
+          2) a debugging prompt for a broken feature,
+          3) a feature-planning prompt for a small extension.
+        expected_result: Three prompts you can save and reuse in future sessions.
+        troubleshooting_note: If the prompts are too abstract, ask Codex to include exact file references.
+        screenshot_ref: The three saved prompts in your notes or Codex thread.
+    checkpoints:
+      - student_input: Write down your next exercise and why it comes next.
+        what_to_verify: Make sure the task builds on what you have already explored in the repo.
+        success_criteria: You have a concrete follow-on task instead of a vague intention.
+        stretch_option: Time-box the next session and define what "done" means.
+      - student_input: Save the restart, debugging, and feature-planning prompts.
+        what_to_verify: Confirm each prompt is specific to the Campus Helper repo.
+        success_criteria: You can reopen the project later without re-inventing your prompts.
+        stretch_option: Share the best prompt with a classmate and compare results.
+  - id: module-7-add-skill
+    title: "Module 7: Post-Class Extension - Add a New Skill"
+    track: extension
+    section: build_your_own_project
+    estimated_time: 30-45 minutes
+    prerequisites:
+      - Module 5 complete
+    learning_objectives:
+      - Create a new skill by following the existing class pattern.
+      - Register a new capability cleanly.
+      - Verify the skill appears in the UI and returns useful output.
+    artifact_to_complete: A new skill concept, file plan, registration plan, and verification checklist.
+    validation_step: Identify the base skill class and the closest existing skill you will model.
+    milestone_label: "Milestone unlocked: you can design a new skill path end to end."
+    steps:
+      - action: Pick a student-facing skill idea.
+        why_it_matters: The skill track is the most direct way to turn a student use case into a visible extension.
+        exact_prompt: |
+          Suggest three new student-oriented skills that fit this repo.
+          For each one, tell me which existing skill is the best implementation pattern.
+        expected_result: Three skill ideas grounded in the current repo and a suggested starting file for each.
+        troubleshooting_note: If the ideas require new external APIs, ask for local-first versions instead.
+        screenshot_ref: Skill ideas and matched pattern files.
+      - action: Plan the new skill in bounded terms.
+        why_it_matters: A scoped skill brief prevents runaway prompts and fragile code changes.
+        exact_prompt: |
+          I want to add this new skill: [describe your idea].
+          Give me the input fields, output shape, files to edit, and a verification checklist.
+        expected_result: A concrete build plan covering the new skill file and the registry update.
+        troubleshooting_note: If the plan adds too many responsibilities, ask Codex to cut the feature to a minimal v1.
+        screenshot_ref: Skill brief with inputs and expected output.
+      - action: Prepare a safe implementation prompt.
+        why_it_matters: Students learn better when they ask for a small implementation slice tied to an existing pattern.
+        exact_prompt: |
+          Write the exact implementation prompt I should use to add this skill by following the style of
+          `campus_helper/skills/study_plan.py` or another closer pattern if appropriate.
+        expected_result: A single prompt that tells Codex what to inspect, what to create, and how to verify success.
+        troubleshooting_note: If the prompt does not mention the registry update, ask Codex to include it explicitly.
+        screenshot_ref: Final skill implementation prompt.
+    checkpoints:
+      - student_input: Name your skill and list the user input fields it needs.
+        what_to_verify: Compare the fields to similar skills already in the repo.
+        success_criteria: The input list is small, practical, and clearly tied to the output.
+        stretch_option: Add one optional field that improves the output without making the skill hard to use.
+      - student_input: Write how you will verify the skill after implementation.
+        what_to_verify: Confirm the plan includes a UI check and one example run.
+        success_criteria: You can tell whether the skill works without guesswork.
+        stretch_option: Add a unit test idea for the new skill output.
+  - id: module-8-add-plugin
+    title: "Module 8: Post-Class Extension - Add a New Plugin"
+    track: extension
+    section: build_your_own_project
+    estimated_time: 25-35 minutes
+    prerequisites:
+      - Module 5 complete
+    learning_objectives:
+      - Understand the plugin boundary in this repo.
+      - Add a transformation layer without changing core skill logic.
+      - Verify the plugin appears as an optional output enhancer.
+    artifact_to_complete: A plugin idea, a short implementation brief, and a verification plan.
+    validation_step: Identify the current plugin and explain what problem plugins solve in this app.
+    milestone_label: "Milestone unlocked: you can add output transformations without touching core logic."
+    steps:
+      - action: Inspect the current plugin boundary.
+        why_it_matters: Plugins are intentionally lighter weight than new skills, and students should know when to choose them.
+        exact_prompt: |
+          Explain how plugins work in this repository and when I should add a plugin instead of a new skill.
+          Use the current plugin implementation as the example.
+        expected_result: A simple explanation tied to `CampusVoicePlugin` and the `apply_plugins` flow in `app.py`.
+        troubleshooting_note: If the answer does not mention the app runner, ask for the exact place where plugins are applied.
+        screenshot_ref: Plugin file and plugin application flow in `app.py`.
+      - action: Choose a plugin transformation.
+        why_it_matters: Good plugin ideas clearly modify presentation, tone, or structure without changing the underlying task.
+        exact_prompt: |
+          Suggest three plugin ideas for this repo that would transform output without changing the core skill logic.
+          Rank them by ease of implementation for a student.
+        expected_result: Three plugin ideas with a recommended easiest-first option.
+        troubleshooting_note: If Codex proposes logic-heavy ideas, remind it that plugins should only decorate or transform output.
+        screenshot_ref: Ranked plugin idea list.
+      - action: Turn the chosen plugin into an implementation prompt.
+        why_it_matters: Students should be able to execute the extension in one focused session.
+        exact_prompt: |
+          I want to build this plugin: [describe your choice].
+          Write the exact prompt I should use to add the plugin, register it, and verify it in the app.
+        expected_result: A concrete prompt covering the new plugin file, registry entry, and a sample run.
+        troubleshooting_note: If verification is missing, ask for the exact skill and plugin combination to demo.
+        screenshot_ref: Final plugin implementation prompt.
+    checkpoints:
+      - student_input: Explain why your chosen feature should be a plugin instead of a skill.
+        what_to_verify: Compare your explanation to the current plugin behavior and app flow.
+        success_criteria: Your plugin changes output format or presentation, not core data gathering logic.
+        stretch_option: Design one second plugin that could stack with the first.
+      - student_input: Save one example input and expected transformed output.
+        what_to_verify: Check that the example demonstrates the plugin visibly.
+        success_criteria: A classmate could tell the plugin worked just by looking at the output.
+        stretch_option: Ask Codex how to make the plugin reusable across more than one skill.
+  - id: module-9-finish-automation
+    title: "Module 9: Post-Class Extension - Finish or Improve an Automation"
+    track: extension
+    section: build_your_own_project
+    estimated_time: 25-40 minutes
+    prerequisites:
+      - Module 5 complete
+    learning_objectives:
+      - Understand the local automation pattern in the repo.
+      - Use existing data to complete a scaffold or improve automation output.
+      - Verify automation behavior without a real scheduler.
+    artifact_to_complete: A plan for either finishing `DeadlineNudgeAutomation` or improving another automation path.
+    validation_step: Identify what the unfinished automation currently does and what data source it should read next.
+    milestone_label: "Milestone unlocked: you can reason about a local automation flow from input to output."
+    steps:
+      - action: Compare the finished automation to the unfinished scaffold.
+        why_it_matters: The best way to finish a scaffold is usually to copy the shape of a working example.
+        exact_prompt: |
+          Compare `campus_helper/automations/morning_digest.py` to
+          `campus_helper/automations/deadline_nudge.py`.
+          Tell me what is missing from the unfinished automation.
+        expected_result: A gap analysis covering missing logic, data use, and registration.
+        troubleshooting_note: If Codex misses the registry step, ask it to include the changes needed for the automation to appear in the UI.
+        screenshot_ref: Both automation files visible side by side.
+      - action: Plan the smallest useful automation completion.
+        why_it_matters: Students should finish with a working v1, not an over-designed automation.
+        exact_prompt: |
+          Give me a minimal v1 plan to finish `DeadlineNudgeAutomation` using the local assignments data.
+          Include the output shape, files to edit, and how to validate the automation in the app.
+        expected_result: A concise plan that reads from `sample_assignments.json`, returns a useful message, and registers the automation.
+        troubleshooting_note: If the plan adds scheduling infrastructure, ask Codex to stay within the local button-triggered pattern.
+        screenshot_ref: A v1 automation brief saved in your notes.
+      - action: Generate an implementation prompt.
+        why_it_matters: Students should be able to hand the repo and the brief to Codex without ambiguity.
+        exact_prompt: |
+          Write the exact implementation prompt I should use to finish the automation by following the
+          `MorningDigestAutomation` pattern and keeping the behavior local-first.
+        expected_result: A small-scope prompt that names the pattern file, expected data source, and verification step.
+        troubleshooting_note: If the prompt is too broad, ask Codex to split planning, implementation, and verification into separate phases.
+        screenshot_ref: Final automation implementation prompt.
+    checkpoints:
+      - student_input: Write the single most important behavior the automation should add.
+        what_to_verify: Compare it to what a student would actually need from a reminder or nudge workflow.
+        success_criteria: The automation solves one clear problem and stays local-first.
+        stretch_option: Add one optional improvement you will leave for later.
+      - student_input: Record the data file and registry update involved.
+        what_to_verify: Confirm both are real paths in the repo.
+        success_criteria: You know which files control the behavior and visibility of the automation.
+        stretch_option: Ask Codex how the automation could be tested with a small fixture.
+  - id: module-10-mini-project
+    title: "Module 10: Build Your Own Mini Project from a Starter Brief"
+    track: extension
+    section: build_your_own_project
+    estimated_time: 45-60 minutes
+    prerequisites:
+      - Modules 7, 8, or 9 complete
+    learning_objectives:
+      - Combine what you learned into an independent but still bounded project.
+      - Use project briefs and checkpoints to keep Codex work structured.
+      - Practice choosing a v1 and deferring extras.
+    artifact_to_complete: A starter brief selection, a v1 project plan, and a reusable execution prompt.
+    validation_step: Pick one starter brief and reduce it to a single-session v1 before implementation.
+    milestone_label: "Milestone unlocked: you can turn a project idea into a bounded Codex build."
+    steps:
+      - action: Pick one starter brief.
+        why_it_matters: Starter briefs keep independent work from becoming too open-ended.
+        exact_prompt: |
+          Show me three mini-project ideas that build on the Campus Helper repo and can be completed in one study session.
+          Each idea should feel useful for students and stay local-first.
+        expected_result: Three bounded project ideas that extend the repo naturally.
+        troubleshooting_note: If the projects feel too big, ask Codex to cut them to a one-file or one-feature v1.
+        screenshot_ref: Mini-project options saved in your notes.
+      - action: Turn the chosen brief into a v1 spec.
+        why_it_matters: This is the point where students practice narrowing scope like an engineer.
+        exact_prompt: |
+          I chose this mini project: [describe your idea].
+          Convert it into a v1 spec with success criteria, files to edit, validation commands, and one thing to defer.
+        expected_result: A small spec with clear scope boundaries and validation steps.
+        troubleshooting_note: If Codex adds multiple optional extras, ask it to defer all but one future enhancement.
+        screenshot_ref: The v1 mini-project spec.
+      - action: Create an implementation sequence.
+        why_it_matters: Independent projects go better when the steps are sequenced instead of improvised.
+        exact_prompt: |
+          Break this mini project into 4 to 6 implementation steps that I can work through with Codex.
+          Each step should end with a small validation check.
+        expected_result: A stepwise build plan with checks after each phase.
+        troubleshooting_note: If the steps are too big, ask Codex to shrink them until each step changes one behavior at a time.
+        screenshot_ref: Stepwise implementation checklist.
+    checkpoints:
+      - student_input: Write the v1 success criteria for your mini project.
+        what_to_verify: Confirm the criteria describe one usable outcome and one validation path.
+        success_criteria: You can tell when the project is done without adding extra scope.
+        stretch_option: Add a "v2 later" note to prevent yourself from over-building.
+      - student_input: Save the implementation sequence.
+        what_to_verify: Make sure each step ends with a validation action.
+        success_criteria: You could hand the sequence to another student and they could follow it.
+        stretch_option: Ask Codex to estimate the time for each step.
+  - id: advanced-git-github
+    title: "Optional Advanced Track: Save and Share Your Work with Git and GitHub"
+    track: advanced
+    section: optional_advanced_track
+    estimated_time: 20-30 minutes
+    prerequisites:
+      - Module 2 complete
+    learning_objectives:
+      - Understand why version control helps after class.
+      - Learn a student-safe path for saving changes to GitHub.
+      - Keep source control optional so it never blocks the core path.
+    artifact_to_complete: A short Git/GitHub workflow plan with the commands or UI steps needed to save work safely.
+    validation_step: Identify whether you are using local-only work, public GitHub, or an internal repo with instructor guidance.
+    milestone_label: "Milestone unlocked: you know how to save and share work without relying on memory."
+    steps:
+      - action: Decide whether you need source control for your current stage.
+        why_it_matters: The advanced track should feel helpful, not mandatory.
+        exact_prompt: |
+          Explain when a student working on this repo should start using Git and GitHub,
+          and when it is still reasonable to stay local-only.
+        expected_result: A balanced explanation that makes Git optional but useful.
+        troubleshooting_note: If the answer sounds prescriptive, ask Codex to separate "good next step" from "required now."
+        screenshot_ref: A simple save-and-share decision checklist.
+      - action: Get a student-safe save flow.
+        why_it_matters: Learners need a practical save path that works outside internal tooling.
+        exact_prompt: |
+          Give me a beginner-friendly Git and GitHub workflow for this repo using public GitHub or another student-safe option.
+          Keep it short and local-first.
+        expected_result: A short workflow for cloning, branching or committing, and pushing work safely.
+        troubleshooting_note: If internal org setup appears, ask Codex to replace it with public GitHub guidance.
+        screenshot_ref: GitHub repo page and the commit or push steps.
+      - action: Separate mixed-audience notes.
+        why_it_matters: Some learners may be internal, but external students should not be blocked by internal assumptions.
+        exact_prompt: |
+          Give me a mixed-audience appendix:
+          one note for external students using public GitHub,
+          and one clearly labeled internal-only note for internal learners using internal repos.
+        expected_result: Two separate notes with clear boundaries.
+        troubleshooting_note: If the internal note dominates the answer, ask Codex to keep the external flow as the default.
+        screenshot_ref: Mixed-audience save and share appendix.
+    checkpoints:
+      - student_input: Choose your save path for now.
+        what_to_verify: Make sure it matches your access level and current goals.
+        success_criteria: You have a concrete, student-safe plan to save work.
+        stretch_option: Add a branch naming habit for future exercises.
+      - student_input: Save the short Git/GitHub workflow.
+        what_to_verify: Confirm it does not depend on internal-only access unless you clearly labeled that section.
+        success_criteria: A classmate could follow the flow without extra context.
+        stretch_option: Ask Codex to explain the workflow in plain language for first-time Git users.
+  - id: advanced-deploy-share
+    title: "Optional Advanced Track: Share or Deploy a Student Project"
+    track: advanced
+    section: optional_advanced_track
+    estimated_time: 20-30 minutes
+    prerequisites:
+      - Advanced Git/GitHub track complete
+    learning_objectives:
+      - Learn how to share a finished student project responsibly.
+      - Keep the default guide local-first while still exposing the next level.
+      - Separate external-safe deployment options from internal-only tooling.
+    artifact_to_complete: A share or deployment plan that matches the student's audience and access.
+    validation_step: Choose whether you only need a demo video, a GitHub repo, or an actual hosted app.
+    milestone_label: "Milestone unlocked: you can choose an appropriate sharing path without over-engineering."
+    steps:
+      - action: Pick the lightest sharing mechanism that matches your goal.
+        why_it_matters: Not every project needs hosting; students should choose the simplest path that works.
+        exact_prompt: |
+          For a student-built Streamlit project like this one, explain when I should
+          1) just share the repo,
+          2) record a demo video,
+          3) host the app publicly.
+        expected_result: A simple decision guide for sharing options.
+        troubleshooting_note: If the answer jumps straight to deployment, ask Codex to compare all three options first.
+        screenshot_ref: Sharing decision checklist.
+      - action: Get an external-student-safe deployment option.
+        why_it_matters: The default guide must work for students without internal OpenAI infrastructure.
+        exact_prompt: |
+          Recommend one beginner-friendly way an external student could share a small Streamlit project
+          after finishing this repo, and explain the minimum steps involved.
+        expected_result: One public-safe deployment or sharing recommendation with minimal setup.
+        troubleshooting_note: If the answer references internal hosting, ask for a public alternative instead.
+        screenshot_ref: Public-safe sharing or deployment plan.
+      - action: Capture the internal-only note separately.
+        why_it_matters: Mixed audiences need clear boundaries so the default path stays clean.
+        exact_prompt: |
+          Give me a clearly labeled internal-only note for learners who do have internal deployment access,
+          but keep it separate from the main student flow.
+        expected_result: A small internal-only appendix that does not affect the external default path.
+        troubleshooting_note: If the answer merges internal and external paths together, ask Codex to split them into separate headings.
+        screenshot_ref: Internal-only deployment note.
+    checkpoints:
+      - student_input: Choose your sharing path for the project you built.
+        what_to_verify: Match the path to your real audience and time budget.
+        success_criteria: You picked the lightest path that still lets others see the work.
+        stretch_option: Add a one-sentence rationale you could use when presenting the project.
+      - student_input: Save the external-safe sharing note and the internal-only note separately.
+        what_to_verify: Confirm the external path stands alone without internal assumptions.
+        success_criteria: The main guide remains student-safe by default.
+        stretch_option: Ask Codex for a small checklist to run before sharing publicly.
+resources:
+  - title: Starter brief - Exam prep skill
+    category: starter_brief
+    audience: all
+    template: |
+      Goal: Add a new skill that turns a course name, exam date, and study hours into a lightweight prep checklist.
+      Constraints: Keep the feature local-first, use the existing skill pattern, and aim for one new file plus a registry update.
+      Validation: The skill appears in the app and produces a checklist for one sample student.
+  - title: Starter brief - Study session plugin
+    category: starter_brief
+    audience: all
+    template: |
+      Goal: Add a plugin that converts any skill output into a more action-oriented checklist for students.
+      Constraints: Do not change core skill logic. Follow the current plugin pattern.
+      Validation: Run an existing skill with and without the plugin and compare the output.
+  - title: Starter brief - Deadline automation
+    category: starter_brief
+    audience: all
+    template: |
+      Goal: Finish the `DeadlineNudgeAutomation` flow using the local assignments file.
+      Constraints: Keep the automation button-triggered and local-first.
+      Validation: The automation appears in the app and returns a useful reminder for one sample student.
+  - title: Example output - Study plan
+    category: example_output
+    audience: all
+    example_output: |
+      Reuse `examples/study_plan_example.md` as the baseline output shape when students are learning how a skill should feel.
+      It is especially useful in Modules 2, 5, and 7 when students need to compare their output to an existing example.
+  - title: Example output - Morning digest
+    category: example_output
+    audience: all
+    example_output: |
+      Reuse `examples/morning_digest_example.md` when students need to understand the structure of a finished automation output.
+      It provides a concrete standard for the "due soon", "smart place to work", and "food checkpoint" sections.
+  - title: Troubleshooting - Local setup
+    category: troubleshooting
+    audience: all
+    faq: |
+      If the app does not run:
+      - confirm you activated the virtual environment,
+      - reinstall dependencies from `requirements.txt`,
+      - rerun `python3 -m unittest discover -s tests`,
+      - then ask Codex to inspect the error from the terminal output instead of guessing.
+  - title: Troubleshooting - Confusing Codex answer
+    category: troubleshooting
+    audience: all
+    faq: |
+      If Codex gives a vague answer, ask for one of these upgrades:
+      - "cite the exact file and line region"
+      - "show me the before and after path"
+      - "give me the smallest possible fix"
+      - "turn that into a validation checklist"
+  - title: Troubleshooting - Overscoped prompt
+    category: troubleshooting
+    audience: all
+    faq: |
+      If Codex proposes too much at once, shrink the ask:
+      - ask it to inspect before editing,
+      - ask for a v1 only,
+      - ask for a plan with one validation step per phase,
+      - ask it to name the pattern file it should follow.
+  - title: Glossary - Skill
+    category: glossary
+    audience: all
+    glossary_entry: |
+      A skill is a reusable capability class in `campus_helper/skills`.
+      In this repo, skills take structured input fields and return student-facing markdown output.
+  - title: Glossary - Plugin
+    category: glossary
+    audience: all
+    glossary_entry: |
+      A plugin transforms the final output after a skill runs.
+      Plugins in this repo should change presentation, tone, or structure, not core logic.
+  - title: Glossary - Service contract
+    category: glossary
+    audience: all
+    glossary_entry: |
+      A service contract is the shape of data a service returns and a consumer expects.
+      Module 4 uses a deliberate mismatch to teach students how to debug that boundary.
+  - title: FAQ - What if I forget everything between sessions?
+    category: faq
+    audience: all
+    faq: |
+      Reopen `README.md`, `WORKSHOP_CHALLENGES.md`, and `campus_helper/workshop_registry.py`.
+      Then run your saved restart prompt from Module 1 and ask Codex to summarize your next best step.
+  - title: FAQ - Do I need GitHub before I can keep learning?
+    category: faq
+    audience: all
+    faq: |
+      No. The core path is intentionally local-first.
+      GitHub helps once you want better version history or an easier way to share the work with others.
+  - title: FAQ - Do I need deployment before I can show progress?
+    category: faq
+    audience: all
+    faq: |
+      No. A repo link, screenshots, or a short demo video are all valid sharing paths.
+      Deployment belongs in the optional advanced track.
+  - title: Internal-only note - Internal repo and deployment variants
+    category: internal_note
+    audience: internal_only
+    internal_only_note: |
+      If the learner is internal and has approved access to internal tooling, keep those notes in a clearly labeled appendix.
+      The external-safe path should remain the default everywhere else in the guide.

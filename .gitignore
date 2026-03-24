@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+.streamlit/
+*.pyc
+.student_guide_progress.json
