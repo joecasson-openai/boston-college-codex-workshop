@@ -94,7 +94,6 @@ shareable Markdown export stay in sync.
 │   └── workshop_registry.py
 ├── examples/
 ├── tests/
-├── FACILITATOR_NOTES.md
 ├── README.md
 └── WORKSHOP_CHALLENGES.md
 ```
@@ -167,21 +166,3 @@ Look for `TODO(workshop)` comments in:
 - [`campus_helper/workshop_registry.py`](./campus_helper/workshop_registry.py)
 - [`campus_helper/skills/study_spots.py`](./campus_helper/skills/study_spots.py)
 - [`campus_helper/automations/deadline_nudge.py`](./campus_helper/automations/deadline_nudge.py)
-
-## Instructor notes
-
-### Seeded bug #1: registration/config mismatch
-
-One implemented extension is not registered correctly, so it does not load into the app. Students should inspect the registry and compare it to the files that exist in `skills/`.
-
-### Seeded bug #2: schema mismatch
-
-One local service returns data in a shape that its consumer does not expect. This causes a visible issue in the study spot workflow and is meant to be debugged by inspecting both sides of the contract.
-
-### Designed merge-conflict hotspot
-
-The intentional conflict hotspot is:
-
-- [`campus_helper/workshop_registry.py`](./campus_helper/workshop_registry.py)
-
-All teams will likely edit that file to register new skills, plugins, and automations. That makes it a good place to discuss branching, merge conflicts, and conflict resolution in the final part of the workshop.
