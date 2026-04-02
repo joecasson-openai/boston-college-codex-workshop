@@ -4,6 +4,14 @@ This repository is a complete starter project for a 50-minute hands-on workshop 
 
 Students all begin from the same codebase, create their own branch, and improve a small but realistic app called **Campus Helper Agent**. The app runs locally, uses mock JSON data, and is intentionally scaffolded so teams need to inspect the repo, iterate with Codex, and make changes across multiple files.
 
+## Your goal in this workshop
+
+Use Codex to inspect the repo, find and explain bugs, make small code changes,
+run validation commands, and summarize what changed.
+
+Some missing features and sidebar warnings are intentional. They are part of the
+exercise, not a sign that your setup is broken.
+
 ## What the app does
 
 The starter app can help with student-oriented workflows like:
@@ -94,6 +102,33 @@ On Windows PowerShell, use:
 py -c "import streamlit, yaml; print('Environment ready')"
 ```
 
+## Recommended workshop flow
+
+1. Clone the repo.
+2. Create a team branch.
+3. Run the app and inspect the current behavior.
+4. Use `WORKSHOP_CHALLENGES.md` to progress through the guided tasks.
+5. Use Codex iteratively rather than trying to solve everything in one prompt.
+
+## How to use Codex in this repo
+
+Start with prompts that ask Codex to inspect first, then make a bounded change,
+then validate:
+
+```text
+Inspect this repo and tell me which files I should open first for Challenge 1.
+```
+
+```text
+Find the cause of the missing skill, explain the bug in plain language, and make
+the smallest safe fix.
+```
+
+```text
+Run the tests, summarize what they cover, and tell me one useful test to add for
+the challenge I just worked on.
+```
+
 ## Self-paced guide app
 
 This repo now includes a separate self-paced learning guide for students who want
@@ -114,14 +149,6 @@ python3 scripts/export_guide.py
 The guide is backed by a structured YAML source at
 `campus_helper/guide_content/student_self_paced_guide.yaml`, so the app and the
 shareable Markdown export stay in sync.
-
-## Recommended workshop flow
-
-1. Clone the repo.
-2. Create a team branch.
-3. Run the app and inspect the current behavior.
-4. Use `WORKSHOP_CHALLENGES.md` to progress through the guided tasks.
-5. Use Codex iteratively rather than trying to solve everything in one prompt.
 
 ## Folder structure
 
@@ -218,3 +245,12 @@ Look for `TODO(workshop)` comments in:
 - [`campus_helper/workshop_registry.py`](./campus_helper/workshop_registry.py)
 - [`campus_helper/skills/study_spots.py`](./campus_helper/skills/study_spots.py)
 - [`campus_helper/automations/deadline_nudge.py`](./campus_helper/automations/deadline_nudge.py)
+
+## After the workshop
+
+If you want to keep going:
+
+1. Run the self-paced guide with `streamlit run guide_app.py`.
+2. Pick one extension from `WORKSHOP_CHALLENGES.md` or the guide's starter briefs.
+3. Ask Codex to add one test for the behavior you changed.
+4. Explore Codex student and community programs in the links above.
