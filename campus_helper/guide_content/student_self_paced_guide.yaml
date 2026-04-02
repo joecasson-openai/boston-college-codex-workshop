@@ -253,11 +253,12 @@ modules:
         troubleshooting_note: If the brief touches too many files, ask Codex to reduce it to a v1.
         screenshot_ref: The implementation brief pinned in the Codex thread.
       - action: Create an exact edit prompt.
-        why_it_matters: Students improve faster when they learn how to give Codex a bounded implementation task.
+        why_it_matters: Students improve faster when they learn how to give Codex a bounded implementation task while still choosing their own solution path.
         exact_prompt: |
-          Write the exact Codex prompt I should use to implement this feature in small, safe steps.
-          Make the prompt mention the pattern file it should follow.
-        expected_result: A ready-to-run implementation prompt that is narrow and specific.
+          Write a flexible Codex prompt I can use to implement this feature in small, safe steps.
+          Include one required outcome, the pattern file to follow, one validation command,
+          and one choice I can make myself about the final behavior or output style.
+        expected_result: A ready-to-run implementation prompt that is narrow but still leaves room for one student-owned decision.
         troubleshooting_note: If the prompt is too broad, ask Codex to split it into "inspect first" and "then implement" phases.
         screenshot_ref: The final implementation prompt ready to paste.
     checkpoints:
@@ -672,12 +673,28 @@ resources:
       - ask for a v1 only,
       - ask for a plan with one validation step per phase,
       - ask it to name the pattern file it should follow.
+  - title: Troubleshooting - Missing test coverage
+    category: troubleshooting
+    audience: all
+    faq: |
+      If the current tests pass but you are not sure they cover the challenge you are working on,
+      ask Codex to inspect the tests and name one important behavior that is still untested.
+      A good prompt is:
+      "Inspect `tests/test_workshop.py` and tell me which workshop challenge behaviors are not covered yet.
+      Propose one minimal test I should add after I finish my fix."
   - title: Glossary - Skill
     category: glossary
     audience: all
     glossary_entry: |
       A skill is a reusable capability class in `campus_helper/skills`.
       In this repo, skills take structured input fields and return student-facing markdown output.
+  - title: Glossary - Repo concepts vs Codex concepts
+    category: glossary
+    audience: all
+    glossary_entry: |
+      This repo has its own local "skills", "plugins", "services", and "automations" so students can practice a modular app architecture.
+      Those are teaching abstractions inside the starter app, not the same thing as Codex product features.
+      Codex itself is the coding agent students use to inspect files, edit code, run commands, debug failures, and summarize what changed.
   - title: Glossary - Plugin
     category: glossary
     audience: all

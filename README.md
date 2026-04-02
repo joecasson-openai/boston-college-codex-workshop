@@ -25,6 +25,8 @@ This stack keeps setup light, avoids frontend build tooling, and lets students f
 
 ## Quick start
 
+### macOS or Linux
+
 1. Create and activate a virtual environment:
 
    ```bash
@@ -35,7 +37,7 @@ This stack keeps setup light, avoids frontend build tooling, and lets students f
 2. Install dependencies:
 
    ```bash
-   pip install -r requirements.txt
+   python3 -m pip install -r requirements.txt
    ```
 
 3. Run the app:
@@ -49,6 +51,48 @@ This stack keeps setup light, avoids frontend build tooling, and lets students f
    ```bash
    python3 -m unittest discover -s tests
    ```
+
+### Windows PowerShell
+
+1. Create and activate a virtual environment:
+
+   ```powershell
+   py -m venv .venv
+   .\.venv\Scripts\Activate.ps1
+   ```
+
+2. Install dependencies:
+
+   ```powershell
+   py -m pip install -r requirements.txt
+   ```
+
+3. Run the app:
+
+   ```powershell
+   streamlit run app.py
+   ```
+
+4. Run the validation tests:
+
+   ```powershell
+   py -m unittest discover -s tests
+   ```
+
+### Setup sanity check
+
+If the tests fail with a missing dependency, first confirm you are using the
+virtual environment and can import the required packages:
+
+```bash
+python3 -c "import streamlit, yaml; print('Environment ready')"
+```
+
+On Windows PowerShell, use:
+
+```powershell
+py -c "import streamlit, yaml; print('Environment ready')"
+```
 
 ## Self-paced guide app
 
@@ -151,6 +195,14 @@ Current examples:
 - `DeadlineNudgeAutomation` scaffold for extension
 
 Students can add a new automation by following the pattern and registering it.
+
+## Codex resources for students
+
+- [Download Codex](https://openai.com/codex/)
+- [Codex for Students](https://developers.openai.com/community/students): students in the U.S. and Canada can receive Codex credits to learn by building real projects, with more countries planned over time.
+- [Codex for Open Source](https://openai.com/form/codex-for-oss/): support for open-source maintainers, including ChatGPT Pro with Codex, API credits, and access to Codex Security for selected projects.
+- [Codex Ambassadors](https://developers.openai.com/community/codex-ambassadors): a global community of meetup and hackathon organizers helping students learn with Codex in practice.
+- [OpenAI Developers Community](https://developers.openai.com/community): the broader home for developer programs, events, and community resources.
 
 ## Sample data and outputs
 

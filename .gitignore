@@ -5,3 +5,4 @@ __pycache__/
 .streamlit/
 *.pyc
 .student_guide_progress.json
+INSTRUCTOR_LESSON_GUIDE.md
