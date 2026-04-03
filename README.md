@@ -9,6 +9,12 @@ Students all begin from the same codebase, create their own branch, and improve 
 Use Codex to inspect the repo, find and explain bugs, make small code changes,
 run validation commands, and summarize what changed.
 
+Each group should build one small end-to-end feature that includes:
+
+- a **skill** for the core student-facing behavior
+- a **plugin** that transforms or polishes that skill's output
+- an **automation** that runs the skill in a repeatable workflow
+
 Some missing features and sidebar warnings are intentional. They are part of the
 exercise, not a sign that your setup is broken.
 
@@ -105,10 +111,26 @@ py -c "import streamlit, yaml; print('Environment ready')"
 ## Recommended workshop flow
 
 1. Clone the repo.
-2. Create a team branch.
+2. Create a team branch such as `group-1`, `group-2`, or `group-3`.
 3. Run the app and inspect the current behavior.
 4. Use `WORKSHOP_CHALLENGES.md` to progress through the guided tasks.
 5. Use Codex iteratively rather than trying to solve everything in one prompt.
+
+## How groups should work together
+
+Everyone in the class starts from the same base repository, but each group
+should work on its own branch.
+
+Within each group, pick one shared feature idea and split ownership like this:
+
+- **Skill owner**: creates or updates the skill class in `campus_helper/skills`
+- **Plugin owner**: creates or updates the output transform in `campus_helper/plugins`
+- **Automation owner**: wires the repeatable workflow in `campus_helper/automations`
+- **Integrator**: owns `campus_helper/workshop_registry.py`, runs the app, and
+  checks the final branch before demo
+
+Suggested rule: only one person edits `workshop_registry.py` at a time so the
+group avoids unnecessary merge conflicts inside the branch.
 
 ## How to use Codex in this repo
 
@@ -189,7 +211,10 @@ Students can add a new skill by:
 
 ### Plugins
 
-Plugins live in [`campus_helper/plugins`](./campus_helper/plugins). They modify the final output after a skill runs.
+Plugins live in [`campus_helper/plugins`](./campus_helper/plugins). In this
+starter app, plugins are local output transforms that modify the final text after
+a skill runs. They are a teaching abstraction inside this repo, not a real MCP
+server.
 
 Current example:
 
@@ -202,7 +227,8 @@ Students can add another plugin without changing the core app runner. They only 
 
 ### Simplified MCP-style services
 
-Services live in [`campus_helper/services`](./campus_helper/services). They mimic tool-connected services while staying fully local.
+Services live in [`campus_helper/services`](./campus_helper/services). They mimic
+tool-connected service boundaries while staying fully local.
 
 Current examples:
 

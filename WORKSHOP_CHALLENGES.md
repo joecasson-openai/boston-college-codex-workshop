@@ -1,88 +1,114 @@
 # Workshop Challenges
 
-These challenges are designed for small teams working with Codex over roughly 35 minutes.
+These challenges are designed for small teams working with Codex over roughly 35
+minutes.
 
-## Challenge 1: Add a new skill
+Each group should ship one small vertical slice on its own branch:
 
-Goal: add a new reusable capability in `campus_helper/skills`.
+- a skill
+- a plugin that transforms that skill's output
+- an automation that runs the skill in a repeatable workflow
 
-Suggested path:
+If there are more than three groups, reuse one of the challenge tracks below.
+Multiple groups can choose the same track as long as each group pushes to its own
+branch, such as `group-1`, `group-2`, or `group-3`.
 
-1. Inspect the existing skill classes.
-2. Notice that one implemented skill is not appearing in the app.
-3. Fix the registration issue in `campus_helper/workshop_registry.py`.
-4. Add your own new skill, such as:
-   - exam prep checklist
-   - office-hours question generator
-   - weekend reset planner
-5. Register your new skill and confirm it appears in the Streamlit UI.
+## How to split work inside one group
 
-Good Codex prompts:
+Use one shared branch per group, then divide the feature implementation by file
+ownership:
 
-- “Inspect the skill architecture and explain how to add a new skill.”
-- “Fix the broken skill registration and add a new `ExamPrepSkill` following the existing pattern.”
+- **Skill owner** works in `campus_helper/skills`
+- **Plugin owner** works in `campus_helper/plugins`
+- **Automation owner** works in `campus_helper/automations`
+- **Integrator** updates `campus_helper/workshop_registry.py`, runs tests, and
+  checks the final app behavior
 
-## Challenge 2: Add a new plugin
+Recommended sequence:
 
-Goal: create a plugin that visibly transforms output without changing core app logic.
+1. Pick one challenge track below.
+2. Ask Codex to inspect the closest existing pattern files.
+3. Build the skill, plugin, and automation in parallel.
+4. Have one person register the new classes in `workshop_registry.py`.
+5. Run the app and `python3 -m unittest discover -s tests`.
+6. Prepare a 1-minute demo of what your group built and what you had to steer
+   Codex on.
 
-Suggested plugin ideas:
+## Challenge Track 1: Exam Prep Pack
 
-- convert outputs into a checklist
-- add a concise executive summary at the top
-- add “next prompt ideas” tailored to the selected skill
-- add a “student-friendly tone” layer
+Goal: help a student turn an upcoming exam into a short prep plan and a repeatable
+reminder workflow.
 
-Expected files:
+Suggested build:
 
-- a new file in `campus_helper/plugins`
-- an entry in `campus_helper/workshop_registry.py`
-
-Good Codex prompts:
-
-- “Create a plugin that reformats skill output into a demo-friendly checklist.”
-- “Show me how plugins are applied in this repo and add a new one.”
-
-## Challenge 3: Connect or fix a tool-backed service
-
-Goal: debug the visible data issue in the study spot workflow.
-
-Suggested path:
-
-1. Run the study spot skill.
-2. Notice that some hours are not shown correctly.
-3. Inspect:
-   - `campus_helper/services/library_hours.py`
-   - `campus_helper/skills/study_spots.py`
-   - `campus_helper/data/library_hours.json`
-4. Fix the contract mismatch so the hours display correctly.
-5. If you finish early, extend the service or skill with another useful field.
+- **Skill**: create an `ExamPrepSkill` that takes course name, exam date, topics,
+  and available hours, then returns a checklist or study plan.
+- **Plugin**: create a plugin that converts the skill output into a tighter
+  checklist, a motivational study format, or a "what to do today" summary.
+- **Automation**: create an automation that runs the exam prep skill for a
+  sample student and produces a "study nudge" output.
 
 Good Codex prompts:
 
-- “Trace why the study spot skill is showing unavailable hours.”
-- “Fix the schema mismatch between the library-hours service and its consumer.”
+- "Inspect the existing skill, plugin, and automation patterns and tell us the
+  smallest set of files to copy for an Exam Prep Pack."
+- "Create a first-pass `ExamPrepSkill` that follows the `StudyPlanSkill` pattern,
+  then summarize how to register and test it."
+- "Create one plugin and one automation that use the new exam prep skill, but
+  keep the implementation local-first and small enough for a classroom demo."
 
-## Challenge 4: Add or repair an automation
+## Challenge Track 2: Club Event Promo Pack
 
-Goal: extend the automation pattern using the provided scaffold.
+Goal: help a club generate a short event blurb and turn it into a reusable event
+announcement workflow.
 
-Suggested path:
+Suggested build:
 
-1. Inspect `MorningDigestAutomation`.
-2. Open `campus_helper/automations/deadline_nudge.py`.
-3. Finish the placeholder logic using local assignment data.
-4. Register the automation in `campus_helper/workshop_registry.py`.
-5. Confirm it appears and runs in the UI.
-
-Possible automation ideas:
-
-- deadline warning
-- club meeting reminder
-- “best next study block” suggestion
-- Friday weekly wrap-up
+- **Skill**: use or improve the club blurb skill so it generates a cleaner event
+  announcement for a selected club, audience, and tone.
+- **Plugin**: create a plugin that transforms the blurb into a social caption,
+  poster checklist, or "ready to share" format.
+- **Automation**: create an automation that generates a weekly event promo digest
+  or a reminder for one selected club.
 
 Good Codex prompts:
 
-- “Use the morning digest pattern to finish the deadline nudge automation.”
-- “Register the new automation and make it visible in the app.”
+- "Inspect why the club blurb skill is not appearing in the app, explain the
+  issue, and make the smallest fix."
+- "Create a plugin that turns club blurb output into a social-post draft without
+  changing the underlying skill logic."
+- "Create a lightweight event promo automation that follows the
+  `MorningDigestAutomation` pattern and uses the club blurb skill's output style."
+
+## Challenge Track 3: Study Day Planner Pack
+
+Goal: help a student choose a study spot, understand open hours, and get a
+repeatable daily study suggestion.
+
+Suggested build:
+
+- **Skill**: improve the study spot recommender or add a new planning skill that
+  includes where to study and when to go.
+- **Plugin**: create a plugin that converts the recommendation into a concise
+  itinerary, checklist, or "next best move" summary.
+- **Automation**: create an automation that produces a morning study suggestion
+  by combining a recommended spot with one deadline or food checkpoint.
+
+Good Codex prompts:
+
+- "Trace why the study spot workflow shows unavailable hours, identify the exact
+  service/consumer mismatch, and recommend the cleanest fix."
+- "Create a plugin that turns the study spot recommendation into a concise
+  itinerary with a clear next action."
+- "Create a morning study suggestion automation by following the existing
+  automation pattern and reusing local service data."
+
+## Shared implementation checklist
+
+Before your demo, make sure your group can show:
+
+- the new or improved skill in the Playground tab
+- the plugin applied to that skill's output
+- the automation in the Automations tab
+- one validation command or manual test you used
+- one example of how you prompted Codex and then refined the result
