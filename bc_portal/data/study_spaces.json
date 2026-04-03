@@ -1,0 +1,58 @@
+{
+  "spaces": [
+    {
+      "name": "O'Neill Library Reading Commons",
+      "zone": "Main Campus",
+      "vibe": "quiet",
+      "has_outlets": true,
+      "crowd_level": "Medium",
+      "nearby_dining": "Hillside Cafe",
+      "description": "A dependable solo-study floor with strong Wi-Fi, long desk runs, and fast access to research help.",
+      "features": ["quiet seating", "power outlets", "reference desk access"],
+      "hours": {
+        "Monday": "7:00 AM - 11:00 PM",
+        "Tuesday": "7:00 AM - 11:00 PM",
+        "Wednesday": "7:00 AM - 11:00 PM",
+        "Thursday": "7:00 AM - 11:00 PM",
+        "Friday": "7:00 AM - 8:00 PM",
+        "Saturday": "9:00 AM - 6:00 PM"
+      }
+    },
+    {
+      "name": "Bapst Library Gargan Hall",
+      "zone": "Chestnut Hill",
+      "vibe": "sunny",
+      "has_outlets": true,
+      "crowd_level": "Low",
+      "nearby_dining": "Eagles Nest",
+      "description": "A polished reading room with natural light and a quieter atmosphere for longer writing and review sessions.",
+      "features": ["natural light", "silent-study norms", "historic reading room"],
+      "hours": {
+        "Monday": "8:00 AM - 10:00 PM",
+        "Tuesday": "8:00 AM - 10:00 PM",
+        "Wednesday": "8:00 AM - 10:00 PM",
+        "Thursday": "8:00 AM - 10:00 PM",
+        "Friday": "8:00 AM - 6:00 PM",
+        "Saturday": "10:00 AM - 4:00 PM"
+      }
+    },
+    {
+      "name": "245 Beacon Collaboration Studio",
+      "zone": "Engineering + Maker Spaces",
+      "vibe": "collaborative",
+      "has_outlets": true,
+      "crowd_level": "High",
+      "nearby_dining": "Tully Cafe",
+      "description": "Best for team design sessions, quick standups, and building through a project with whiteboard access nearby.",
+      "features": ["team tables", "whiteboards", "prototype-friendly seating"],
+      "hours": {
+        "Monday": "8:00 AM - 9:00 PM",
+        "Tuesday": "8:00 AM - 9:00 PM",
+        "Wednesday": "8:00 AM - 9:00 PM",
+        "Thursday": "8:00 AM - 9:00 PM",
+        "Friday": "8:00 AM - 7:00 PM",
+        "Saturday": "11:00 AM - 5:00 PM"
+      }
+    }
+  ]
+}

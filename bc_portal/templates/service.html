@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}{{ card.name }} | Heights Student Services{% endblock %}
+
+{% block content %}
+<section class="service-page-shell">
+  <div class="service-header-card">
+    <p class="section-label">{{ card.kicker }}</p>
+    <div class="service-title-row">
+      <div>
+        <h1>{{ card.name }}</h1>
+        <p>{{ card.summary }}</p>
+      </div>
+      <span class="status-pill">{{ card.status }}</span>
+    </div>
+  </div>
+
+  <div class="service-layout">
+    <section class="workflow-panel">
+      <div class="panel-heading-row">
+        <div>
+          <p class="section-label">Live service request</p>
+          <h2>Submit a student request and review the generated guidance.</h2>
+        </div>
+      </div>
+
+      <form method="post" class="service-form">
+        <div class="form-grid">
+          {% for field in fields %}
+            <label class="field-block">
+              <span>{{ field.label }}</span>
+              {% if field.type == "select" %}
+                <select name="{{ field.name }}">
+                  {% for option in field.options %}
+                    <option value="{{ option }}" {% if form_state[field.name] == option %}selected{% endif %}>{{ option }}</option>
+                  {% endfor %}
+                </select>
+              {% elif field.type == "number" %}
+                <input
+                  type="number"
+                  name="{{ field.name }}"
+                  min="{{ field.min or 0 }}"
+                  max="{{ field.max or 24 }}"
+                  value="{{ form_state[field.name] }}"
+                >
+              {% elif field.type == "checkbox" %}
+                <div class="checkbox-row">
+                  <input type="checkbox" name="{{ field.name }}" id="{{ field.name }}" {% if form_state[field.name] %}checked{% endif %}>
+                  <span>Yes, include this option</span>
+                </div>
+              {% else %}
+                <input type="text" name="{{ field.name }}" value="{{ form_state[field.name] }}">
+              {% endif %}
+            </label>
+          {% endfor %}
+        </div>
+        <button class="primary-button" type="submit">Generate service response</button>
+      </form>
+
+      <article class="result-card">
+        <p class="mini-label">{{ result.eyebrow }}</p>
+        <h2>{{ result.headline }}</h2>
+        <p class="result-summary">{{ result.summary }}</p>
+
+        <div class="result-metrics">
+          {% for metric in result.metrics %}
+            <div class="result-metric">
+              <small>{{ metric.label }}</small>
+              <strong>{{ metric.value }}</strong>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="result-columns">
+          <div>
+            <h3>Recommended actions</h3>
+            <ul>
+              {% for item in result.primary_items %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div>
+            <h3>{{ result.secondary_title }}</h3>
+            <ul>
+              {% for item in result.secondary_items %}
+                <li>{{ item }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="construction-note">{{ result.status_note }}</div>
+      </article>
+    </section>
+
+    <aside class="builder-panel">
+      <p class="section-label">Builder Challenge</p>
+      <h2>{{ challenge.headline }}</h2>
+      <p>{{ challenge.description }}</p>
+
+      <div class="builder-block">
+        <h3>Files to inspect</h3>
+        <ul class="file-list">
+          {% for file in challenge.files %}
+            <li><code>{{ file }}</code></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="builder-block">
+        <h3>Starter Codex prompt</h3>
+        <p class="prompt-card">{{ challenge.prompt }}</p>
+      </div>
+
+      <div class="builder-block bonus-challenge">
+        <div class="bonus-header-row">
+          <p class="mini-label">Bonus Challenge</p>
+          <span class="bonus-badge">Optional</span>
+        </div>
+        <p class="bonus-goal-copy">{{ challenge.stretch_goal }}</p>
+      </div>
+    </aside>
+  </div>
+</section>
+{% endblock %}

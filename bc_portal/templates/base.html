@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Heights Student Services{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand-lockup" href="{{ url_for('dashboard') }}">
+        <span class="brand-mark">BC</span>
+        <span class="brand-copy">
+          <span class="brand-eyebrow">Boston College</span>
+          <span class="brand-name">Heights Student Services</span>
+        </span>
+      </a>
+      <nav class="top-nav">
+        <a href="{{ url_for('service_detail', slug='academic-advising') }}">Academic Advising</a>
+        <a href="{{ url_for('service_detail', slug='campus-life') }}">Campus Life</a>
+        <a href="{{ url_for('service_detail', slug='study-spaces') }}">Study Spaces</a>
+      </nav>
+      <div class="student-chip">
+        <span class="student-avatar">MJ</span>
+        <div>
+          <p>Maya Johnson</p>
+          <small>Class of 2028</small>
+        </div>
+      </div>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+  </body>
+</html>

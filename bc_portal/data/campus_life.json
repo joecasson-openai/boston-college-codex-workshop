@@ -1,0 +1,46 @@
+{
+  "clubs": [
+    {
+      "name": "BC Coding Club",
+      "category": "Technology + Innovation",
+      "mission": "helping students build practical software projects and learn modern tooling",
+      "default_venue": "245 Beacon Innovation Lab",
+      "expected_turnout": "35-50",
+      "recommended_post_day": "Tuesday",
+      "signature_hook": "hands-on demos, beginner-friendly pairing, and a take-home project idea",
+      "promotion_checklist": [
+        "Share the announcement in the club newsletter and first-year student channels.",
+        "Add a one-line accessibility note and room directions.",
+        "Confirm a 10-minute welcome block and a clear end-of-event next step."
+      ]
+    },
+    {
+      "name": "Eco Action Collective",
+      "category": "Sustainability + Service",
+      "mission": "turning campus sustainability ideas into volunteer projects and measurable action",
+      "default_venue": "McElroy Commons 237",
+      "expected_turnout": "20-30",
+      "recommended_post_day": "Thursday",
+      "signature_hook": "quick project sign-ups and a student-led planning circle",
+      "promotion_checklist": [
+        "Post one clear call to action with the volunteer shift signup form.",
+        "Highlight what newcomers can do even if they have never joined before.",
+        "Bring a simple QR code slide for check-in and follow-up."
+      ]
+    },
+    {
+      "name": "Heights Debate Society",
+      "category": "Public Speaking + Leadership",
+      "mission": "helping students practice persuasive speaking, argument structure, and live feedback",
+      "default_venue": "Gasson Hall Seminar Room",
+      "expected_turnout": "25-40",
+      "recommended_post_day": "Monday",
+      "signature_hook": "a mini practice round with coaching from experienced debaters",
+      "promotion_checklist": [
+        "Include the debate topic and a beginner-friendly framing sentence.",
+        "Invite students to attend as either speakers or observers.",
+        "Send a same-day reminder with location and arrival time."
+      ]
+    }
+  ]
+}

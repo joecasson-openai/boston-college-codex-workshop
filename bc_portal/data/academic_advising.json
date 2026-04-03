@@ -1,0 +1,62 @@
+{
+  "students": [
+    {
+      "name": "Maya Johnson",
+      "class_year": "Class of 2028",
+      "school": "Morrissey College of Arts & Sciences",
+      "advisor": "Dr. Elena Morales",
+      "courses": [
+        {
+          "code": "CSCI 1102",
+          "title": "Computer Science II",
+          "next_step": "finish recursion review and bring one debugging question to office hours"
+        },
+        {
+          "code": "MATH 2210",
+          "title": "Linear Algebra",
+          "next_step": "complete the vector spaces worksheet before Thursday discussion"
+        },
+        {
+          "code": "ENGL 1080",
+          "title": "First-Year Writing",
+          "next_step": "outline the revision memo and flag one paragraph for instructor feedback"
+        }
+      ],
+      "support_resources": [
+        "Reserve one Center for Teaching Excellence tutoring block.",
+        "Review degree audit notes before selecting next semester electives.",
+        "Draft two advisor questions focused on workload and prerequisite planning."
+      ],
+      "career_note": "Add one Career Center follow-up: save a summer internship search block after midterms."
+    },
+    {
+      "name": "Daniel Kim",
+      "class_year": "Class of 2027",
+      "school": "Carroll School of Management",
+      "advisor": "Prof. Marcus Rivera",
+      "courses": [
+        {
+          "code": "ACCT 1021",
+          "title": "Financial Accounting",
+          "next_step": "review the practice case and summarize two balance-sheet questions"
+        },
+        {
+          "code": "ISYS 3257",
+          "title": "Data Management",
+          "next_step": "validate project milestones and test the import script with sample data"
+        },
+        {
+          "code": "MKTG 2150",
+          "title": "Marketing Principles",
+          "next_step": "draft campaign notes and bring one segmentation question to class"
+        }
+      ],
+      "support_resources": [
+        "Check Fulton advising hours for a concentration planning conversation.",
+        "Block one peer-study session before the accounting quiz.",
+        "Update the four-year plan with next semester's required sequence."
+      ],
+      "career_note": "Add one career follow-up: refine your resume bullets for the upcoming employer coffee chat."
+    }
+  ]
+}

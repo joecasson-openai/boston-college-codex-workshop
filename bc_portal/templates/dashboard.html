@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Heights Student Services | Dashboard{% endblock %}
+
+{% block content %}
+<section class="dashboard-hero">
+  <div class="hero-copy">
+    <p class="section-label">MyBC Student Services</p>
+    <h1>Your campus support hub for advising, student life, and study planning.</h1>
+    <p class="hero-text">
+      Browse the three student services below, submit a quick request, and review
+      the draft guidance cards. Your group can then improve one under-construction
+      service on its branch.
+    </p>
+    <div class="hero-actions">
+      <a class="primary-button" href="{{ url_for('service_detail', slug='academic-advising') }}">Start with advising</a>
+      <a class="secondary-button" href="#service-grid">View service catalog</a>
+    </div>
+  </div>
+  <aside class="hero-panel">
+    <p class="section-label">Today's snapshot</p>
+    <div class="snapshot-grid">
+      <article><strong>{{ total_services }}</strong><span>services online</span></article>
+      <article><strong>3</strong><span>group tracks</span></article>
+      <article><strong>1</strong><span>branch per team</span></article>
+    </div>
+    <div class="priority-card">
+      <p class="mini-label">Next reminder</p>
+      <h2>Midterm prep check-in</h2>
+      <p>Meet with your group, inspect one service route, and ship a small but visible improvement.</p>
+    </div>
+  </aside>
+</section>
+
+<section class="service-grid-wrap" id="service-grid">
+  <div class="section-heading-row">
+    <div>
+      <p class="section-label">Student services directory</p>
+      <h2>Pick one service and open its live workflow.</h2>
+    </div>
+    <p class="subtle-copy">Each service includes a Builder Challenge panel for class work.</p>
+  </div>
+
+  <div class="service-grid">
+    {% for card in cards %}
+      <article class="service-card">
+        <div class="card-topline">
+          <p class="mini-label">{{ card.kicker }}</p>
+          <span class="status-pill">{{ card.status }}</span>
+        </div>
+        <h3>{{ card.name }}</h3>
+        <p>{{ card.summary }}</p>
+        <div class="card-footer">
+          <div class="mini-stat">
+            <small>{{ card.metric_label }}</small>
+            <strong>{{ card.metric_value }}</strong>
+          </div>
+          <a href="{{ url_for('service_detail', slug=card.slug) }}">{{ card.cta }} →</a>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

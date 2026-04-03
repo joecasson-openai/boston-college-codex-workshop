@@ -1,282 +1,197 @@
-# Campus Helper Agent Workshop
+# Heights Student Services Portal
 
-This repository is a complete starter project for a 50-minute hands-on workshop on AI-assisted coding with Codex.
+A Boston College-inspired student services portal for a hands-on Codex workshop.
 
-Students all begin from the same codebase, create their own branch, and improve a small but realistic app called **Campus Helper Agent**. The app runs locally, uses mock JSON data, and is intentionally scaffolded so teams need to inspect the repo, iterate with Codex, and make changes across multiple files.
+Students use the portal as if it were a real campus product, then work in small
+groups to improve one under-construction service on their own branch. The goal is
+to practice a practical Codex workflow: inspect the codebase, make a focused
+implementation, validate the change, and explain the diff before pushing to
+GitHub.
 
-## Your goal in this workshop
+## What you are building
 
-Use Codex to inspect the repo, find and explain bugs, make small code changes,
-run validation commands, and summarize what changed.
+The portal has three student-facing service areas:
 
-Each group should build one small end-to-end feature that includes:
+- **Academic Advising**
+  Build better course planning, deadline prioritization, and advising next steps.
+- **Campus Life**
+  Improve club and event communication so announcements feel polished and
+  ready to share.
+- **Study Spaces**
+  Improve study-space recommendations with hours, crowd context, and nearby
+  food options.
 
-- a **skill** for the core student-facing behavior
-- a **plugin** that transforms or polishes that skill's output
-- an **automation** that runs the skill in a repeatable workflow
+Each service page includes a **Builder Challenge** panel with a starter prompt,
+files to inspect, and a **Bonus Challenge** if your group finishes early. The
+main service UI should feel like a real student portal; the challenge panel is
+the workshop scaffolding.
 
-Some missing features and sidebar warnings are intentional. They are part of the
-exercise, not a sign that your setup is broken.
+## Before class: install Codex
 
-## What the app does
+Choose one Codex setup path before the workshop.
 
-The starter app can help with student-oriented workflows like:
+### Option 1: Codex app
 
-- generating study plans
-- recommending study spots
-- drafting club event blurbs
-- looking up campus info from local mock data
-- generating digest-style reminders
+Recommended on macOS and Windows if you want the full desktop workflow.
 
-## Tech stack
+1. Download Codex from the [Codex app page](https://developers.openai.com/codex/app/).
+2. Open Codex and sign in with your ChatGPT account.
+3. Clone this repository locally.
+4. In Codex, select this repo folder as your project.
+5. Make sure **Local** mode is selected before asking Codex to inspect or edit
+   files on your machine.
 
-- Python 3.10+
-- Streamlit for the local UI
-- Standard-library JSON-backed services
-- Standard-library `unittest` for lightweight validation
+### Option 2: Codex IDE extension
 
-This stack keeps setup light, avoids frontend build tooling, and lets students focus on architecture and AI-assisted iteration.
+Use this if you prefer to work inside VS Code, Cursor, or Windsurf.
 
-## Quick start
+1. Install the extension from the
+   [Codex IDE page](https://developers.openai.com/codex/ide/).
+2. Open this repository in your editor.
+3. Open the Codex panel, sign in, and ask Codex to inspect the current project.
+
+### Option 3: Codex CLI
+
+Use this if you prefer terminal-first development or if you are on Linux.
+
+```bash
+npm i -g @openai/codex
+codex
+```
+
+You can also install with Homebrew:
+
+```bash
+brew install codex
+codex
+```
+
+More setup details are in the [Codex quickstart](https://developers.openai.com/codex/quickstart/).
+
+## Before class: verify your local Python environment
+
+The app runs locally with Flask and standard Python tests. Use Python 3.10+.
 
 ### macOS or Linux
 
-1. Create and activate a virtual environment:
+```bash
+git clone https://github.com/joecasson-openai/boston-college-codex-workshop.git
+cd boston-college-codex-workshop
 
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install --upgrade pip
+python3 -m pip install -r requirements.txt
 
-2. Install dependencies:
-
-   ```bash
-   python3 -m pip install -r requirements.txt
-   ```
-
-3. Run the app:
-
-   ```bash
-   streamlit run app.py
-   ```
-
-4. Run the validation tests:
-
-   ```bash
-   python3 -m unittest discover -s tests
-   ```
+python3 -c "import flask; print('Environment ready')"
+python3 -m unittest discover -s tests
+python3 app.py
+```
 
 ### Windows PowerShell
 
-1. Create and activate a virtual environment:
-
-   ```powershell
-   py -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
-
-2. Install dependencies:
-
-   ```powershell
-   py -m pip install -r requirements.txt
-   ```
-
-3. Run the app:
-
-   ```powershell
-   streamlit run app.py
-   ```
-
-4. Run the validation tests:
-
-   ```powershell
-   py -m unittest discover -s tests
-   ```
-
-### Setup sanity check
-
-If the tests fail with a missing dependency, first confirm you are using the
-virtual environment and can import the required packages:
-
-```bash
-python3 -c "import streamlit, yaml; print('Environment ready')"
-```
-
-On Windows PowerShell, use:
-
 ```powershell
-py -c "import streamlit, yaml; print('Environment ready')"
+git clone https://github.com/joecasson-openai/boston-college-codex-workshop.git
+cd boston-college-codex-workshop
+
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+py -m pip install --upgrade pip
+py -m pip install -r requirements.txt
+
+py -c "import flask; print('Environment ready')"
+py -m unittest discover -s tests
+py app.py
 ```
 
-## Recommended workshop flow
+Then open `http://127.0.0.1:5001`.
 
-1. Clone the repo.
-2. Create a team branch such as `group-1`, `group-2`, or `group-3`.
-3. Run the app and inspect the current behavior.
-4. Use `WORKSHOP_CHALLENGES.md` to progress through the guided tasks.
-5. Use Codex iteratively rather than trying to solve everything in one prompt.
+If activation fails on Windows because PowerShell blocks scripts, run
+`Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`, activate the
+virtual environment again, and continue.
 
-## How groups should work together
+## Workshop flow
 
-Everyone in the class starts from the same base repository, but each group
-should work on its own branch.
+1. Pull the latest `main` branch.
+2. Create one branch for your group, such as `group-1-academic-advising`,
+   `group-2-campus-life`, or `group-3-study-spaces`.
+3. Run the portal and click through each service once before editing anything.
+4. Pick your group’s service area and read the Builder Challenge panel.
+5. Ask Codex to explain the route, service module, template, and test files that
+   power that workflow.
+6. Ask Codex for a small implementation plan, then make one focused change.
+7. Run the tests, manually check the UI, and ask Codex to summarize the diff.
+8. Commit and push your group branch to GitHub.
 
-Within each group, pick one shared feature idea and split ownership like this:
+## Suggested team roles
 
-- **Skill owner**: creates or updates the skill class in `campus_helper/skills`
-- **Plugin owner**: creates or updates the output transform in `campus_helper/plugins`
-- **Automation owner**: wires the repeatable workflow in `campus_helper/automations`
-- **Integrator**: owns `campus_helper/workshop_registry.py`, runs the app, and
-  checks the final branch before demo
+Everyone works from the same repository, but each group pushes to its own
+branch.
 
-Suggested rule: only one person edits `workshop_registry.py` at a time so the
-group avoids unnecessary merge conflicts inside the branch.
+- **Service logic owner**: updates one module in `bc_portal/services`
+- **UI owner**: improves `bc_portal/templates/service.html` and
+  `bc_portal/static/styles.css`
+- **Data and test owner**: updates one JSON file in `bc_portal/data` and adds or
+  extends a test in `tests/test_portal.py`
+- **Integrator**: runs the app, checks the final branch, and prepares the demo
 
-## How to use Codex in this repo
+If your group has fewer people, combine roles. If there are more than three
+groups, multiple groups can choose the same service as long as they work on
+separate branches.
 
-Start with prompts that ask Codex to inspect first, then make a bounded change,
-then validate:
+## Suggested Codex prompts
+
+Start with inspection before implementation:
 
 ```text
-Inspect this repo and tell me which files I should open first for Challenge 1.
+Inspect the Academic Advising route, service module, template, and tests. Explain
+how a form submission turns into the response card, and identify one small,
+high-value improvement our group could ship today.
 ```
+
+Then ask for a bounded implementation:
 
 ```text
-Find the cause of the missing skill, explain the bug in plain language, and make
-the smallest safe fix.
+Implement the smallest useful version of that improvement across the service,
+template, and tests. Keep the UI polished, run validation, and summarize the
+diff when you are done.
 ```
+
+For review and debugging:
 
 ```text
-Run the tests, summarize what they cover, and tell me one useful test to add for
-the challenge I just worked on.
+Run the test suite, inspect any failing behavior in our service branch, and
+recommend the smallest safe fix. Do not rewrite unrelated files.
 ```
 
-## Self-paced guide app
-
-This repo now includes a separate self-paced learning guide for students who want
-to keep practicing after the live workshop.
-
-Run the guide app:
-
-```bash
-streamlit run guide_app.py
-```
-
-Export the same guide content to Markdown:
-
-```bash
-python3 scripts/export_guide.py
-```
-
-The guide is backed by a structured YAML source at
-`campus_helper/guide_content/student_self_paced_guide.yaml`, so the app and the
-shareable Markdown export stay in sync.
-
-## Folder structure
+## Project map
 
 ```text
 .
 ├── app.py
-├── campus_helper/
-│   ├── automations/
+├── bc_portal/
+│   ├── __init__.py
 │   ├── data/
-│   ├── plugins/
 │   ├── services/
-│   ├── skills/
-│   ├── runtime.py
-│   └── workshop_registry.py
-├── examples/
+│   ├── static/
+│   └── templates/
 ├── tests/
-├── README.md
-└── WORKSHOP_CHALLENGES.md
+└── README.md
 ```
 
-## Architecture overview
+Useful files by service:
 
-### Skills
+- Academic Advising: `bc_portal/services/academic_advising.py`
+- Campus Life: `bc_portal/services/campus_life.py`
+- Study Spaces: `bc_portal/services/study_spaces.py`
+- Shared page template: `bc_portal/templates/service.html`
+- Shared styling: `bc_portal/static/styles.css`
+- Validation tests: `tests/test_portal.py`
 
-Skills live in [`campus_helper/skills`](./campus_helper/skills). They are the main reusable capabilities the app can run.
+## Keep building after the workshop
 
-Current examples:
-
-- `StudyPlanSkill`
-- `StudySpotsSkill`
-- one additional skill that is implemented but not currently loading correctly
-
-Students can add a new skill by:
-
-- creating a new file in `skills/`
-- following the existing class pattern
-- registering it in `campus_helper/workshop_registry.py`
-
-### Plugins
-
-Plugins live in [`campus_helper/plugins`](./campus_helper/plugins). In this
-starter app, plugins are local output transforms that modify the final text after
-a skill runs. They are a teaching abstraction inside this repo, not a real MCP
-server.
-
-Current example:
-
-- `CampusVoicePlugin`
-
-Students can add another plugin without changing the core app runner. They only need to:
-
-- create a new plugin class
-- register it in `campus_helper/workshop_registry.py`
-
-### Simplified MCP-style services
-
-Services live in [`campus_helper/services`](./campus_helper/services). They mimic
-tool-connected service boundaries while staying fully local.
-
-Current examples:
-
-- study space lookup
-- library hours lookup
-- dining hall hours lookup
-
-These services read local JSON files in [`campus_helper/data`](./campus_helper/data) and are consumed by skills or automations.
-
-### Automations
-
-Automations live in [`campus_helper/automations`](./campus_helper/automations). They simulate scheduled or trigger-based behavior with a button-driven workflow in the UI.
-
-Current examples:
-
-- `MorningDigestAutomation`
-- `DeadlineNudgeAutomation` scaffold for extension
-
-Students can add a new automation by following the pattern and registering it.
-
-## Codex resources for students
-
-- [Download Codex](https://openai.com/codex/)
-- [Codex for Students](https://developers.openai.com/community/students): students in the U.S. and Canada can receive Codex credits to learn by building real projects, with more countries planned over time.
-- [Codex for Open Source](https://openai.com/form/codex-for-oss/): support for open-source maintainers, including ChatGPT Pro with Codex, API credits, and access to Codex Security for selected projects.
-- [Codex Ambassadors](https://developers.openai.com/community/codex-ambassadors): a global community of meetup and hackathon organizers helping students learn with Codex in practice.
-- [OpenAI Developers Community](https://developers.openai.com/community): the broader home for developer programs, events, and community resources.
-
-## Sample data and outputs
-
-- Mock data: [`campus_helper/data`](./campus_helper/data)
-- Sample outputs: [`examples`](./examples)
-- Self-paced guide content: [`campus_helper/guide_content/student_self_paced_guide.yaml`](./campus_helper/guide_content/student_self_paced_guide.yaml)
-- Markdown export target: [`exports/student_self_paced_guide.md`](./exports/student_self_paced_guide.md)
-
-## Where students will work
-
-Look for `TODO(workshop)` comments in:
-
-- [`campus_helper/workshop_registry.py`](./campus_helper/workshop_registry.py)
-- [`campus_helper/skills/study_spots.py`](./campus_helper/skills/study_spots.py)
-- [`campus_helper/automations/deadline_nudge.py`](./campus_helper/automations/deadline_nudge.py)
-
-## After the workshop
-
-If you want to keep going:
-
-1. Run the self-paced guide with `streamlit run guide_app.py`.
-2. Pick one extension from `WORKSHOP_CHALLENGES.md` or the guide's starter briefs.
-3. Ask Codex to add one test for the behavior you changed.
-4. Explore Codex student and community programs in the links above.
+- [Codex overview](https://developers.openai.com/codex/)
+- [Codex for Students](https://developers.openai.com/community/students)
+- [Codex for Open Source](https://openai.com/form/codex-for-oss/)
+- [Codex Ambassadors](https://developers.openai.com/community/codex-ambassadors)
+- [OpenAI Developers Community](https://developers.openai.com/community)
