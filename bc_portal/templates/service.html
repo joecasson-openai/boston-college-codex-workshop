@@ -76,7 +76,19 @@
             <h3>Recommended actions</h3>
             <ul>
               {% for item in result.primary_items %}
-                <li>{{ item }}</li>
+                {% if item is string %}
+                  <li>{{ item }}</li>
+                {% else %}
+                  <li>
+                    <div class="action-text">{{ item.text }}</div>
+                    {% if item.evaluation and item.evaluation.homeworkHours is defined %}
+                      <div class="action-meta">Estimated Workload: {{ item.evaluation.homeworkHours }} hrs/week</div>
+                    {% endif %}
+                    {% if item.evaluation and item.evaluation.difficulty is defined %}
+                      <div class="action-meta">Difficulty: {{ item.evaluation.difficulty }} / 5</div>
+                    {% endif %}
+                  </li>
+                {% endif %}
               {% endfor %}
             </ul>
           </div>
