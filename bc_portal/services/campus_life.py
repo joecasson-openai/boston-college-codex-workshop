@@ -7,7 +7,7 @@ _PAYLOAD = load_json("campus_life.json")
 
 SERVICE_CARD = {
     "slug": "campus-life",
-    "name": "Campus Life",
+    "name": "Campus Life.",
     "kicker": "Clubs + Event Promotion",
     "summary": (
         "Draft event announcements and outreach plans for student organizations "
