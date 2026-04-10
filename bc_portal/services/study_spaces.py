@@ -7,7 +7,7 @@ _PAYLOAD = load_json("study_spaces.json")
 
 SERVICE_CARD = {
     "slug": "study-spaces",
-    "name": "Study Spaces",
+    "name": "Study Spaces.",
     "kicker": "Libraries + Nearby Dining",
     "summary": (
         "Find a study location that matches your work style, check open hours, "

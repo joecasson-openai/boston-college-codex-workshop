@@ -60,6 +60,7 @@ class PortalTests(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         body = response.data.decode()
+        self.assertIn("Study Spaces.", body)
         self.assertIn("Top recommendation", body)
         self.assertIn("Nearby dining", body)
 
