@@ -42,6 +42,35 @@ class PortalTests(unittest.TestCase):
         self.assertIn("Maya Johnson&#39;s advising plan", body)
         self.assertIn("Weekly study hours", body)
 
+    def test_academic_advising_shows_evaluation_when_cached(self):
+        # Pre-populate the eagleeval cache so the UI will render workload/difficulty
+        import json
+        from pathlib import Path
+
+        cache_path = Path(__file__).resolve().parents[1] / "bc_portal" / "data" / "eagleeval_cache.json"
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        cache = {
+            "CSCI1102": {"homeworkHours": 9, "difficulty": 3.2},
+            "MATH2210": {"homeworkHours": 5, "difficulty": 4.0},
+        }
+        with cache_path.open("w") as fh:
+            json.dump(cache, fh)
+
+        response = self.app.post(
+            "/services/academic-advising",
+            data={
+                "student_name": "Maya Johnson",
+                "priority": "Prepare for midterms",
+                "weekly_hours": "10",
+                "include_career_note": "on",
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        body = response.data.decode()
+        self.assertIn("Estimated Workload", body)
+        self.assertIn("Difficulty:", body)
+
     def test_campus_life_service_generates_announcement(self):
         response = self.app.post(
             "/services/campus-life",

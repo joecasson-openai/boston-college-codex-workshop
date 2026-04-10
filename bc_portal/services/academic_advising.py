@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from bc_portal.services.common import load_json
+from bc_portal.services.eagleeval_service import getCourseEvaluation
 
 
 _PAYLOAD = load_json("academic_advising.json")
@@ -93,15 +94,21 @@ def build_response(form_state: dict) -> dict:
     weekly_hours = max(int(form_state["weekly_hours"]), len(student["courses"]))
     hours_per_course = max(1, weekly_hours // len(student["courses"]))
 
-    action_items = [
-        f"Reserve {hours_per_course} focused hour(s) for {course['code']}: {course['next_step']}"
-        for course in student["courses"]
-    ]
-    action_items.append(
-        f"Bring one question about '{form_state['priority']}' to your next meeting with {student['advisor']}."
-    )
+    action_items = []
+    for course in student["courses"]:
+        text = f"Reserve {hours_per_course} focused hour(s) for {course['code']}: {course['next_step']}"
+        eval_data = getCourseEvaluation(course["code"]) or {}
+        # Only include evaluation keys when present (clean UI principle)
+        if eval_data:
+            action_items.append({"text": text, "evaluation": eval_data})
+        else:
+            action_items.append({"text": text})
+
+    action_items.append({
+        "text": f"Bring one question about '{form_state['priority']}' to your next meeting with {student['advisor']}."
+    })
     if form_state["include_career_note"]:
-        action_items.append(student["career_note"])
+        action_items.append({"text": student["career_note"]})
 
     return {
         "eyebrow": f"{student['class_year']} | {student['school']}",
