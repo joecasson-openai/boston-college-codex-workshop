@@ -63,8 +63,9 @@ BUILDER_CHALLENGE = {
     ],
     "prompt": (
         "Inspect the Campus Life workflow from form submission to announcement "
-        "card. Improve one realistic part of the output or event-planning data, "
-        "then validate the route with a test."
+        "card, then propose one realistic improvement to the output or event-"
+        "planning data. Before editing files, ask me to confirm the plan; after "
+        "I approve, validate the route with a test."
     ),
     "stretch_goal": (
         "Generate channel-specific announcement variants or a posting timeline "

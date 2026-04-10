@@ -70,7 +70,8 @@ BUILDER_CHALLENGE = {
     ],
     "prompt": (
         "Inspect the Academic Advising service and template, then propose one "
-        "small feature that makes the advising plan more personalized. Implement "
+        "small feature that makes the advising plan more personalized. Before "
+        "editing files, ask me to confirm the plan; after I approve, implement "
         "the smallest useful version and add one test."
     ),
     "stretch_goal": (

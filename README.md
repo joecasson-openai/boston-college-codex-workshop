@@ -146,10 +146,10 @@ Start with inspection before implementation:
 ```text
 Inspect the Academic Advising route, service module, template, and tests. Explain
 how a form submission turns into the response card, and identify one small,
-high-value improvement our group could ship today.
+high-value improvement our group could ship today. Do not edit files yet.
 ```
 
-Then ask for a bounded implementation:
+After the group confirms the plan, ask for a bounded implementation:
 
 ```text
 Implement the smallest useful version of that improvement across the service,

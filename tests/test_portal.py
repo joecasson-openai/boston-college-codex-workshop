@@ -1,6 +1,7 @@
 import unittest
 
 from bc_portal import create_app
+from bc_portal.services import SERVICE_MODULES
 
 
 class PortalTests(unittest.TestCase):
@@ -15,6 +16,14 @@ class PortalTests(unittest.TestCase):
         self.assertIn("Academic Advising", body)
         self.assertIn("Campus Life", body)
         self.assertIn("Study Spaces", body)
+
+    def test_builder_challenge_prompts_require_confirmation_before_edits(self):
+        for service in SERVICE_MODULES.values():
+            with self.subTest(service=service.SERVICE_CARD["slug"]):
+                prompt = service.BUILDER_CHALLENGE["prompt"].lower()
+                self.assertIn("before editing files", prompt)
+                self.assertIn("confirm", prompt)
+                self.assertIn("approve", prompt)
 
     def test_academic_advising_service_generates_plan(self):
         response = self.app.post(

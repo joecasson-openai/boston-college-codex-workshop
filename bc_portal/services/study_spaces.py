@@ -56,9 +56,10 @@ BUILDER_CHALLENGE = {
         "tests/test_portal.py",
     ],
     "prompt": (
-        "Inspect the Study Spaces recommendation flow and data file, then add one "
-        "small service improvement that makes the result more useful for students. "
-        "Run tests and summarize the tradeoff you chose."
+        "Inspect the Study Spaces recommendation flow and data file, then propose "
+        "one small service improvement that makes the result more useful for "
+        "students. Before editing files, ask me to confirm the tradeoff; after I "
+        "approve, run tests and summarize what changed."
     ),
     "stretch_goal": (
         "Add a closing-soon warning, a smarter fallback when the top space is "
