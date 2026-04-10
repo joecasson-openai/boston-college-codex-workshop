@@ -7,7 +7,7 @@ _PAYLOAD = load_json("academic_advising.json")
 
 SERVICE_CARD = {
     "slug": "academic-advising",
-    "name": "Academic Advising",
+    "name": "Academic Advising.",
     "kicker": "Degree Planning + Advisor Prep",
     "summary": (
         "Turn your current course load, academic priorities, and available study "
